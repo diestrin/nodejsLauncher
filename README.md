@@ -1,1 +1,1 @@
-Hello
+This is a very basic plugin for SublimeText to run the NodeJS files into the console.
