@@ -1,19 +1,18 @@
-import commands, re
+from subprocess import Popen
+import re
 import sublime, sublime_plugin
 
-class nodeLauncher(sublime_plugin.TextCommand):
+p = 0
+
+class NodelauncherCommand(sublime_plugin.TextCommand):
   def run(self, edit):
-    self.save()
-    self.launch(edit)
+    sublime.set_timeout(self.launch, 100)
 
-  def save(self):
-    self.view.run_command("save")
+  #def endS(self,):
+  #  p.terminate()
 
-  def launch(self, edit):
+  def launch(self):
     regx = re.compile(" ")
-    log = commands.getoutput("node " +
-      regx.sub("\ ", self.view.file_name()))
-
-    #if len(html) > 0:
-    #  self.view.replace(edit, sublime.Region(0, self.view.size()), html.decode('utf-8'))
-    #  sublime.set_timeout(self.save, 100)
+    cmd = "node " + regx.sub("\ ", self.view.file_name())
+    p = Popen(cmd)
+    #sublime_plugin.on_query_context(self, "ctrl+o+p", sublime.OP_EQUAL, endS, true)
